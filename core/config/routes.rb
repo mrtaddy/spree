@@ -4,7 +4,7 @@ Spree::Core::Engine.routes.draw do
 
   resources :products
 
-  match '/locale/set', :to => 'locale#set'
+  match '/locale/set', :to => 'locale#set', via: [:get]
 
   resources :tax_categories
 
@@ -46,7 +46,7 @@ Spree::Core::Engine.routes.draw do
   end
 
   # route globbing for pretty nested taxon and product paths
-  match '/t/*id', :to => 'taxons#show', :as => :nested_taxons
+  match '/t/*id', :to => 'taxons#show', :as => :nested_taxons, via: [:get]
 
   namespace :admin do
     get '/search/users', :to => "search#users", :as => :search_users
@@ -178,8 +178,10 @@ Spree::Core::Engine.routes.draw do
     end
   end
 
-  match '/admin', :to => 'admin/orders#index', :as => :admin
+  # RAILSUPDATE_FIXME: spree_dash内のルーティングと重複している
+  #                    今使っているかどうかが不明なので確認して対応する
+  #match '/admin', :to => 'admin/orders#index', :as => :admin, via: [:get]
 
-  match '/content/cvv', :to => 'content#cvv', :as => :cvv
+  match '/content/cvv', :to => 'content#cvv', :as => :cvv, via: [:get]
   match '/content/*path', :to => 'content#show', :via => :get, :as => :content
 end
