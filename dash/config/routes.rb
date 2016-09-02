@@ -1,5 +1,5 @@
 Spree::Core::Engine.routes.prepend do
-  match '/admin' => 'admin/overview#index', :as => :admin
+  match '/admin' => 'admin/overview#index', :as => :admin, via: [:get]
 
   get '/admin/analytics/sign_up' => 'admin/analytics#sign_up', :as => :admin_analytics_sign_up
   post '/admin/analytics/register' => 'admin/analytics#register', :as => :admin_analytics_register
